@@ -2,21 +2,18 @@ import { CollectionConfig } from 'payload/types'
 
 const Pages: CollectionConfig = {
   slug: 'pages',
-  admin: {
-    useAsTitle: 'title',
-  },
   access: {
-    create: ({ req: { user } }) => {
-      return user.pagePermissions.create
-    },
     read: ({ req: { user } }) => {
-      return user.pagePermissions.read
+      return user?.pagePermissions?.read || false;
+    },
+    create: ({ req: { user } }) => {
+      return user?.pagePermissions?.create || false;
     },
     update: ({ req: { user } }) => {
-      return user.pagePermissions.update
+      return user?.pagePermissions?.update || false;
     },
     delete: ({ req: { user } }) => {
-      return user.pagePermissions.delete
+      return user?.pagePermissions?.delete || false;
     },
   },
   fields: [
@@ -25,7 +22,18 @@ const Pages: CollectionConfig = {
       type: 'text',
       required: true,
     },
-    // Add more fields as needed
+    {
+      name: 'content',
+      type: 'richText',
+      required: true,
+    },
+
+    {
+      name: 'published',
+      type: 'checkbox',
+      required: true,
+      defaultValue: false,
+    }
   ],
 }
 

@@ -2,26 +2,33 @@ import { CollectionConfig } from 'payload/types'
 
 const Events: CollectionConfig = {
   slug: 'events',
-  admin: {
-    useAsTitle: 'title',
-  },
   access: {
-    create: ({ req: { user } }) => {
-      return user.eventPermissions.create
-    },
     read: ({ req: { user } }) => {
-      return user.eventPermissions.read
+      return user?.eventPermissions?.read || false;
+    },
+    create: ({ req: { user } }) => {
+      return user?.eventPermissions?.create || false;
     },
     update: ({ req: { user } }) => {
-      return user.eventPermissions.update
+      return user?.eventPermissions?.update || false;
     },
     delete: ({ req: { user } }) => {
-      return user.eventPermissions.delete
+      return user?.eventPermissions?.delete || false;
     },
   },
   fields: [
     {
       name: 'title',
+      type: 'text',
+      required: true,
+    },
+    {
+      name: 'eventDate',
+      type: 'date',
+      required: true,
+    },
+    {
+      name: 'location',
       type: 'text',
       required: true,
     },
