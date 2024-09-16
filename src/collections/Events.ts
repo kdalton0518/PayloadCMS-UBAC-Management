@@ -4,16 +4,16 @@ const Events: CollectionConfig = {
   slug: 'events',
   access: {
     read: ({ req: { user } }) => {
-      return user?.eventPermissions?.read || false;
+      return user?.eventPermissions?.read || false
     },
     create: ({ req: { user } }) => {
-      return user?.eventPermissions?.create || false;
+      return user?.eventPermissions?.create || false
     },
     update: ({ req: { user } }) => {
-      return user?.eventPermissions?.update || false;
+      return user?.eventPermissions?.update || false
     },
     delete: ({ req: { user } }) => {
-      return user?.eventPermissions?.delete || false;
+      return user?.eventPermissions?.delete || false
     },
   },
   fields: [

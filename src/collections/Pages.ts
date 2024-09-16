@@ -4,16 +4,16 @@ const Pages: CollectionConfig = {
   slug: 'pages',
   access: {
     read: ({ req: { user } }) => {
-      return user?.pagePermissions?.read || false;
+      return user?.pagePermissions?.read || false
     },
     create: ({ req: { user } }) => {
-      return user?.pagePermissions?.create || false;
+      return user?.pagePermissions?.create || false
     },
     update: ({ req: { user } }) => {
-      return user?.pagePermissions?.update || false;
+      return user?.pagePermissions?.update || false
     },
     delete: ({ req: { user } }) => {
-      return user?.pagePermissions?.delete || false;
+      return user?.pagePermissions?.delete || false
     },
   },
   fields: [
@@ -33,7 +33,7 @@ const Pages: CollectionConfig = {
       type: 'checkbox',
       required: true,
       defaultValue: false,
-    }
+    },
   ],
 }
 

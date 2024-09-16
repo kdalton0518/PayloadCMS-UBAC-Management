@@ -1,40 +1,44 @@
 import { CollectionConfig } from 'payload/types'
 
-import React, {JSX} from 'react';
+import React, { JSX } from 'react'
 
 const PermissionsHeader = (): JSX.Element => {
-  return React.createElement('h2', { style: { fontSize: '24px', fontWeight: 'bold', margin: '20px 0' } }, 'Permissions');
-};
+  return React.createElement(
+    'h2',
+    { style: { fontSize: '24px', fontWeight: 'bold', margin: '20px 0' } },
+    'Permissions'
+  )
+}
 
 const Users: CollectionConfig = {
   slug: 'users',
   auth: true,
   access: {
     read: ({ req: { user } }) => {
-      if (user?.role === 'owner') return true;
-      return user?.userPermissions?.read 
-        ? true 
+      if (user?.role === 'owner') return true
+      return user?.userPermissions?.read
+        ? true
         : {
             id: {
               equals: user?.id,
             },
-          };
+          }
     },
     create: ({ req: { user } }) => {
-      if (user?.role === 'owner') return true;
+      if (user?.role === 'owner') return true
       return user?.userPermissions?.create
     },
     update: ({ req: { user } }) => {
-      if (user?.role === 'owner') return true;
-      return (user?.userPermissions?.update)
+      if (user?.role === 'owner') return true
+      return user?.userPermissions?.update
     },
     delete: ({ req: { user } }) => {
-      if (user?.role === 'owner') return true;
-      return (user?.userPermissions?.delete)
+      if (user?.role === 'owner') return true
+      return user?.userPermissions?.delete
     },
   },
   fields: [
-  {
+    {
       name: 'name',
       type: 'text',
       required: true,
@@ -56,7 +60,7 @@ const Users: CollectionConfig = {
         {
           label: 'Staff',
           value: 'staff',
-        }
+        },
       ],
       required: true,
     },
@@ -91,7 +95,7 @@ const Users: CollectionConfig = {
               type: 'checkbox',
               label: 'Delete Users',
               defaultValue: false,
-            }
+            },
           ],
         },
       ],
@@ -102,8 +106,8 @@ const Users: CollectionConfig = {
       admin: {
         components: {
           Field: () => PermissionsHeader(),
-        }
-      }
+        },
+      },
     },
     {
       type: 'collapsible',
@@ -169,8 +173,7 @@ const Users: CollectionConfig = {
         },
       ],
     },
-
   ],
 }
 
-export default Users;
+export default Users
